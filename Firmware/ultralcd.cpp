@@ -625,7 +625,7 @@ void lcd_commands()
 				lcd_commands_type = 0;
 			}
 		}
-		if (lcd_commands_step == 1 && !blocks_queued() && !homing_flag) {
+		if (lcd_commands_step == 1 && !blocks_queued() && !is_homing) {
 			lcd_setstatuspgm(MSG_PRINT_PAUSED);
 			isPrintPaused = true;
 			long_pause();
@@ -1828,7 +1828,7 @@ static void lcd_support_menu()
   }
   #ifndef MK1BP
   MENU_ITEM(back, PSTR("------------"), 0);
-  if (!IS_SD_PRINTING && !is_usb_printing && (lcd_commands_type != LCD_COMMAND_V2_CAL)) MENU_ITEM(submenu, MSG_XYZ_DETAILS, lcd_menu_xyz_y_min);
+  MENU_ITEM(submenu, MSG_XYZ_DETAILS, lcd_menu_xyz_y_min);
   MENU_ITEM(submenu, MSG_INFO_EXTRUDER, lcd_menu_extruder_info);
 
 #ifdef TMC2130
@@ -2401,7 +2401,7 @@ static void _lcd_babystep(int axis, const char *msg)
 
   if (encoderPosition != 0) 
   {
-	if (homing_flag) encoderPosition = 0;
+	if (is_homing) encoderPosition = 0;
 
     menuData.babyStep.babystepMem[axis] += (int)encoderPosition;
 	if (axis == 2) {
@@ -4010,7 +4010,7 @@ static void lcd_settings_menu()
   MENU_ITEM(back, MSG_MAIN, lcd_settings_menu_back);
 
   MENU_ITEM(submenu, MSG_TEMPERATURE, lcd_control_temperature_menu);
-  if (!homing_flag)
+  if (!is_homing)
   {
 	  MENU_ITEM(submenu, MSG_MOVE_AXIS, lcd_move_menu_1mm);
   }
@@ -4091,7 +4091,7 @@ static void lcd_settings_menu()
   }
 #endif //HAS_SECOND_SERIAL
 
-  if (!isPrintPaused && !homing_flag)
+  if (!isPrintPaused && !is_homing)
 	{
 		MENU_ITEM(submenu, MSG_BABYSTEP_Z, lcd_babystep_z);
 	}
@@ -5584,7 +5584,7 @@ static void lcd_main_menu()
         
     }*/
     
-  if ( ( IS_SD_PRINTING || is_usb_printing || (lcd_commands_type == LCD_COMMAND_V2_CAL)) && (current_position[Z_AXIS] < Z_HEIGHT_HIDE_LIVE_ADJUST_MENU) && !homing_flag && !mesh_bed_leveling_flag)
+  if ( ( IS_SD_PRINTING || is_usb_printing || (lcd_commands_type == LCD_COMMAND_V2_CAL)) && (current_position[Z_AXIS] < Z_HEIGHT_HIDE_LIVE_ADJUST_MENU) && !is_homing && !mesh_bed_leveling_flag)
   {
 	MENU_ITEM(submenu, MSG_BABYSTEP_Z, lcd_babystep_z);//8
   }
@@ -5603,7 +5603,7 @@ static void lcd_main_menu()
   {
     if (card.isFileOpen())
     {
-		if (mesh_bed_leveling_flag == false && homing_flag == false) {
+		if (mesh_bed_leveling_flag == false && is_homing == false) {
 			if (card.sdprinting)
 			{
 				MENU_ITEM(function, MSG_PAUSE_PRINT, lcd_sdcard_pause);
@@ -5615,7 +5615,7 @@ static void lcd_main_menu()
 			MENU_ITEM(submenu, MSG_STOP_PRINT, lcd_sdcard_stop);
 		}
 	}
-	else if (lcd_commands_type == LCD_COMMAND_V2_CAL && mesh_bed_leveling_flag == false && homing_flag == false) {
+	else if (lcd_commands_type == LCD_COMMAND_V2_CAL && mesh_bed_leveling_flag == false && is_homing == false) {
 		//MENU_ITEM(submenu, MSG_STOP_PRINT, lcd_sdcard_stop);
 	}
 	else
@@ -5878,7 +5878,7 @@ void lcd_print_stop() {
 	mbl.active = false;
 #endif
 	// Stop the stoppers, update the position from the stoppers.
-	if (mesh_bed_leveling_flag == false && homing_flag == false) {
+	if (mesh_bed_leveling_flag == false && is_homing == false) {
 		planner_abort_hard();
 		// Because the planner_abort_hard() initialized current_position[Z] from the stepper,
 		// Z baystep is no more applied. Reset it.

@@ -285,7 +285,7 @@ int extruder_multiply[EXTRUDERS] = {100
 int bowden_length[4] = {385, 385, 385, 385};
 
 bool is_usb_printing = false;
-bool homing_flag = false;
+bool is_homing = false; //!< Homing is in progress if true.
 
 bool temp_cal_active = false;
 
@@ -2965,7 +2965,7 @@ void process_commands()
 #endif
 
       // Flag for the display update routine and to disable the print cancelation during homing.
-		  homing_flag = true;
+		  is_homing = true;
       
       // Which axes should be homed?
       bool home_x = code_seen(axis_codes[X_AXIS]);
@@ -3218,7 +3218,7 @@ void process_commands()
 	else
 		{
 			st_synchronize();
-			homing_flag = false;
+			is_homing = false;
 			// Push the commands to the front of the message queue in the reverse order!
 			// There shall be always enough space reserved for these commands.
 			// enquecommand_front_P((PSTR("G80")));
@@ -3228,7 +3228,7 @@ void process_commands()
 
 	  if (farm_mode) { prusa_statistics(20); };
 
-	  homing_flag = false;
+	  is_homing = false;
 #if 0
       SERIAL_ECHOPGM("G28, final ");  print_world_coordinates();
       SERIAL_ECHOPGM("G28, final ");  print_physical_coordinates();
