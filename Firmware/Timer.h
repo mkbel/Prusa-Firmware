@@ -29,13 +29,13 @@ public:
     /**
      * @brief Start timer
      */
-    void start()
+    inline void start()
     {
         m_started = millis();
         m_isRunning = true;
     }
-    void stop(){m_isRunning = false;}
-    bool running(){return m_isRunning;}
+    inline void stop(){m_isRunning = false;}
+    inline bool running(){return m_isRunning;}
     /**
      * @brief Timer has expired
      *
@@ -49,7 +49,7 @@ public:
      * @retval true Timer has expired
      * @retval false Timer not expired yet, or is not running, or time window in which is timer considered expired passed.
      */
-    bool expired(T msPeriod)
+    inline bool expired(T msPeriod)
     {
         if (!m_isRunning) return false;
         bool expired = false;
@@ -75,7 +75,7 @@ public:
 private:
     bool m_isRunning;
     T m_started;
-};
+} __attribute__ ((__packed__));
 
 /**
  * @brief Timer unsigned long specialization
