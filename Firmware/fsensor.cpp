@@ -7,6 +7,7 @@
 #include "planner.h"
 #include "fastio.h"
 #include "cmdqueue.h"
+#include "mmu.h"
 
 //Basic params
 #define FSENSOR_CHUNK_LEN    0.64F  //filament sensor chunk length 0.64mm
@@ -441,7 +442,7 @@ void fsensor_update(void)
 			fsensor_watch_runout = true;
 			fsensor_err_cnt = 0;
 		}
-		else if (fsensor_watch_runout && (fsensor_err_cnt > FSENSOR_ERR_MAX))
+		else if (fsensor_watch_runout && ((mmu_enabled && 0 == mmu_finda) || (fsensor_err_cnt > FSENSOR_ERR_MAX)))
 		{
 			bool autoload_enabled_tmp = fsensor_autoload_enabled;
 			fsensor_autoload_enabled = false;
@@ -491,7 +492,7 @@ void fsensor_update(void)
 				printf_P(PSTR("fsensor_update - M600\n"));
 				eeprom_update_byte((uint8_t*)EEPROM_FERROR_COUNT, eeprom_read_byte((uint8_t*)EEPROM_FERROR_COUNT) + 1);
 				eeprom_update_word((uint16_t*)EEPROM_FERROR_COUNT_TOT, eeprom_read_word((uint16_t*)EEPROM_FERROR_COUNT_TOT) + 1);
-				enquecommand_front_P((PSTR("M600")));
+				enquecommand_front_P((PSTR("M600 AUTO")));
 				fsensor_watch_runout = false;
 			}
 			fsensor_autoload_enabled = autoload_enabled_tmp;
