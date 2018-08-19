@@ -612,7 +612,7 @@ static void lcd_implementation_status_screen()
 	}
 	else*/
 		lcd_print(LCD_STR_FEEDRATE[0]);
-    lcd_print(itostr3(feedmultiply));
+    lcd_print(itostr3(mmu_finda));
     lcd_puts_P(PSTR("%     "));
 #endif /* PLANNER_DIAGNOSTICS */
 

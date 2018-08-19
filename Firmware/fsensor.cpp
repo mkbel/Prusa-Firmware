@@ -438,6 +438,7 @@ void fsensor_st_block_chunk(block_t* bl, int cnt)
 //! If there is still no plausible signal from filament sensor plans M600 (Filament change).
 void fsensor_update(void)
 {
+    static bool interchange = false;
 	if (fsensor_enabled)
 	{
 		if (fsensor_printing_saved)
@@ -447,47 +448,60 @@ void fsensor_update(void)
 			fsensor_watch_runout = true;
 			fsensor_err_cnt = 0;
 		}
-		else if (fsensor_watch_runout && ((mmu_enabled && 0 == mmu_finda) || (fsensor_err_cnt > FSENSOR_ERR_MAX)))
+		else if (fsensor_watch_runout)
 		{
-			bool autoload_enabled_tmp = fsensor_autoload_enabled;
-			fsensor_autoload_enabled = false;
+		    if (fsensor_err_cnt > FSENSOR_ERR_MAX)
+            {
+                bool autoload_enabled_tmp = fsensor_autoload_enabled;
+                fsensor_autoload_enabled = false;
 
-			fsensor_stop_and_save_print();
-			fsensor_printing_saved = true;
+                fsensor_stop_and_save_print();
+                fsensor_printing_saved = true;
 
-			fsensor_err_cnt = 0;
-			fsensor_oq_meassure_start(0);
+                fsensor_err_cnt = 0;
+                fsensor_oq_meassure_start(0);
 
-			enquecommand_front_P((PSTR("G1 E-3 F200")));
-			process_commands();
-			cmdqueue_pop_front();
-			st_synchronize();
+                enquecommand_front_P((PSTR("G1 E-3 F200")));
+                process_commands();
+                cmdqueue_pop_front();
+                st_synchronize();
 
-			enquecommand_front_P((PSTR("G1 E3 F200")));
-			process_commands();
-			cmdqueue_pop_front();
-			st_synchronize();
+                enquecommand_front_P((PSTR("G1 E3 F200")));
+                process_commands();
+                cmdqueue_pop_front();
+                st_synchronize();
 
-			fsensor_oq_meassure_stop();
+                fsensor_oq_meassure_stop();
 
-			bool err = false;
-			err |= (fsensor_oq_er_sum > 1);
-			err |= (fsensor_oq_yd_sum < (4 * FSENSOR_OQ_MIN_YD));
-			if (!err)
-			{
-				printf_P(PSTR("fsensor_err_cnt = 0\n"));
-				fsensor_restore_print_and_continue();
-				fsensor_printing_saved = false;
-			}
-			else
-			{
-				printf_P(PSTR("fsensor_update - M600\n"));
-				eeprom_update_byte((uint8_t*)EEPROM_FERROR_COUNT, eeprom_read_byte((uint8_t*)EEPROM_FERROR_COUNT) + 1);
-				eeprom_update_word((uint16_t*)EEPROM_FERROR_COUNT_TOT, eeprom_read_word((uint16_t*)EEPROM_FERROR_COUNT_TOT) + 1);
-				enquecommand_front_P((PSTR("M600 AUTO")));
-				fsensor_watch_runout = false;
-			}
-			fsensor_autoload_enabled = autoload_enabled_tmp;
+                bool err = false;
+                err |= (fsensor_oq_er_sum > 1);
+                err |= (fsensor_oq_yd_sum < (4 * FSENSOR_OQ_MIN_YD));
+                if (!err)
+                {
+                    printf_P(PSTR("fsensor_err_cnt = 0\n"));
+                    fsensor_restore_print_and_continue();
+                    fsensor_printing_saved = false;
+                }
+                else
+                {
+                    printf_P(PSTR("fsensor_update - M600\n"));
+                    eeprom_update_byte((uint8_t*)EEPROM_FERROR_COUNT, eeprom_read_byte((uint8_t*)EEPROM_FERROR_COUNT) + 1);
+                    eeprom_update_word((uint16_t*)EEPROM_FERROR_COUNT_TOT, eeprom_read_word((uint16_t*)EEPROM_FERROR_COUNT_TOT) + 1);
+                    enquecommand_front_P((PSTR("M600")));
+                    fsensor_watch_runout = false;
+                }
+                fsensor_autoload_enabled = autoload_enabled_tmp;
+            }
+            if (mmu_enabled && (0 == mmu_finda) && !interchange)
+		    {
+                interchange = true;
+                fsensor_stop_and_save_print();
+                fsensor_printing_saved = true;
+
+                printf_P(PSTR("fsensor_update - M600\n"));
+                enquecommand_front_P((PSTR("M600 AUTO")));
+                fsensor_watch_runout = false;
+            }
 		}
 	}
 }

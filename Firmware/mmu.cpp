@@ -92,6 +92,17 @@ void mmu_loop(void)
 //	printf_P(PSTR("MMU loop, state=%d\n"), mmu_state);
 	switch (mmu_state)
 	{
+	case 2:
+        if (mmu_rx_ok() > 0)
+        {
+        fscanf_P(uart2io, PSTR("%hhu"), &mmu_finda); //scan finda from buffer
+        mmu_state = 1;
+        }
+        return;
+	case 1:
+        mmu_puts_P(PSTR("P0\n")); //send 'read finda' request
+        mmu_state = 2;
+        return;
 	case 0:
 		return;
 	case -1:
