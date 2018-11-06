@@ -3174,10 +3174,6 @@ extern uint8_t st_backlash_y;
 //! Implemented Codes
 //! -------------------
 //!
-//!@n PRUSA CODES
-//!@n P F - Returns FW versions
-//!@n P R - Returns revision of printer
-//!
 //!@n G0  -> G1
 //!@n G1  - Coordinated Movement X Y Z E
 //!@n G2  - CW ARC
