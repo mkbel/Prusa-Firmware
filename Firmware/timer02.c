@@ -17,7 +17,7 @@ void timer02_set_pwm0(uint8_t pwm0)
 	if (pwm0)
 	{
 		TCCR0A |= (2 << COM0B0);
-		OCR0B = pwm0 - 1;
+		OCR0B = pwm0;
 	}
 	else
 	{
