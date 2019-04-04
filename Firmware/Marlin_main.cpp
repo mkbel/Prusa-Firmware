@@ -8631,6 +8631,7 @@ void long_pause() //long pause print
 
 	//Move XY to side
 	current_position[X_AXIS] = X_PAUSE_POS;
+	plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], 50, active_extruder);
 	current_position[Y_AXIS] = Y_PAUSE_POS;
 	plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], 50, active_extruder);
 
