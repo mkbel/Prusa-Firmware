@@ -3008,6 +3008,8 @@ static void gcode_M600(bool automatic, float x_position, float y_position, float
 
     //Move XY to side
     current_position[X_AXIS] = x_position;
+    plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS],
+                current_position[E_AXIS], FILAMENTCHANGE_XYFEED, active_extruder);
     current_position[Y_AXIS] = y_position;
     plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS],
             current_position[E_AXIS], FILAMENTCHANGE_XYFEED, active_extruder);
