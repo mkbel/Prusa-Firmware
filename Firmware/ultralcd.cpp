@@ -8305,6 +8305,7 @@ void menu_lcd_lcdupdate_func(void)
 			if (lcd_draw_update == 0)
 			lcd_draw_update = 1;
 			lcd_encoder += lcd_encoder_diff / ENCODER_PULSES_PER_STEP;
+			Sound_DoSound_Echo();
 			lcd_encoder_diff = 0;
 			lcd_timeoutToStatus.start();
 		}

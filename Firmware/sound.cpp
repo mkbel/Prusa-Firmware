@@ -92,7 +92,7 @@ switch(eSoundMode)
 }
 
 
-static void Sound_DoSound_Echo(void)
+void Sound_DoSound_Echo(void)
 {
 uint8_t nI;
 

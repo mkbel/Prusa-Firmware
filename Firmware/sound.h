@@ -27,6 +27,7 @@ extern void Sound_Default(void);
 extern void Sound_Save(void);
 extern void Sound_CycleState(void);
 extern void Sound_MakeSound(eSOUND_TYPE eSoundType);
+void Sound_DoSound_Echo(void);
 
 //static void Sound_DoSound_Echo(void);
 //static void Sound_DoSound_Prompt(void);

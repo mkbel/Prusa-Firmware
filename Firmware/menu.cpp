@@ -65,7 +65,13 @@ void menu_goto(menu_func_t menu, const uint32_t encoder, const bool feedback, bo
 void menu_start(void)
 {
     if (lcd_encoder > 0x8000) lcd_encoder = 0;
-    if (lcd_encoder < 0) lcd_encoder = 0;
+    if (lcd_encoder < 0)
+    {
+        lcd_encoder = 0;
+        _tone(BEEPER, 0);
+        _delay(100);
+        _noTone(BEEPER);
+    }
     if (lcd_encoder < menu_top)
 		menu_top = lcd_encoder;
     menu_line = menu_top;
@@ -75,7 +81,12 @@ void menu_start(void)
 void menu_end(void)
 {
 	if (lcd_encoder >= menu_item)
+	{
 		lcd_encoder = menu_item - 1;
+        _tone(BEEPER, 0);
+        _delay(50);
+        _noTone(BEEPER);
+	}
 	if (((uint8_t)lcd_encoder) >= menu_top + LCD_HEIGHT)
 	{
 		menu_top = lcd_encoder - LCD_HEIGHT + 1;
