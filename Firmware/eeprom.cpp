@@ -8,6 +8,9 @@
 #include <avr/eeprom.h>
 #include <stdint.h>
 
+
+#include "language.h"
+
 #if 0
 template <typename T>
 static T eeprom_read(T *address);
@@ -36,6 +39,11 @@ template <>
 bool eeprom_is_uninitialized<char>(char *address)
 {
     return (0xff == eeprom_read_byte(reinterpret_cast<uint8_t*>(address)));
+}
+
+bool is_sheet_initialized(){
+  return (0xffff != eeprom_read_word(reinterpret_cast<uint16_t*>(&(EEPROM_Sheets_base->
+  s[eeprom_read_byte(&(EEPROM_Sheets_base->active_sheet))].z_offset))));
 }
 
 void eeprom_init()
