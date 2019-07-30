@@ -7601,8 +7601,10 @@ Sigma_Exit:
   // -------------------------
 	case 701:
 	{
-		if (mmu_enabled && code_seen('E'))
-			tmp_extruder = code_value();
+		if (mmu_enabled)
+		{
+		    tmp_extruder = code_seen('E') ? code_value() : 0;
+		}
 		gcode_M701();
 	}
 	break;
