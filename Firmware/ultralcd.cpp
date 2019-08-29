@@ -6584,8 +6584,7 @@ static void lcd_rename_sheet_menu()
 
 static void lcd_reset_sheet()
 {
-    SheetName sheetName;
-    default_sheet_name(selected_sheet, sheetName);
+    SheetName sheetName = default_sheet_name(selected_sheet);
 	eeprom_update_word(reinterpret_cast<uint16_t *>(&(EEPROM_Sheets_base->s[selected_sheet].z_offset)),0xffff);
 	eeprom_update_block(sheetName.c,EEPROM_Sheets_base->s[selected_sheet].name,sizeof(Sheet::name));
 	if (selected_sheet == eeprom_read_byte(&(EEPROM_Sheets_base->active_sheet)))

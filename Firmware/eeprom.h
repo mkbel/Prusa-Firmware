@@ -236,7 +236,7 @@ struct SheetName
 {
     char c[sizeof(Sheet::name) + 1];
 };
-void default_sheet_name(uint8_t index, SheetName &sheetName);
+SheetName default_sheet_name(uint8_t index);
 #endif
 
 #endif // EEPROM_H
