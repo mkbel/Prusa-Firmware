@@ -1,0 +1,19 @@
+<map id="Sd2Card.h" name="Sd2Card.h">
+<area shape="rect" id="node2" href="$Marlin_8h_source.html" title="Marlin.h" alt="" coords="788,155,856,181"/>
+<area shape="rect" id="node29" href="$SdFatConfig_8h.html" title="configuration definitions " alt="" coords="985,80,1091,107"/>
+<area shape="rect" id="node31" href="$Sd2PinMap_8h_source.html" title="Sd2PinMap.h" alt="" coords="860,80,960,107"/>
+<area shape="rect" id="node32" href="$SdInfo_8h_source.html" title="SdInfo.h" alt="" coords="1116,80,1187,107"/>
+<area shape="rect" id="node12" href="$system__timer_8h.html" title="system_timer.h" alt="" coords="1126,229,1238,256"/>
+<area shape="rect" id="node14" href="$fastio_8h_source.html" title="fastio.h" alt="" coords="1261,229,1327,256"/>
+<area shape="rect" id="node16" href="$Configuration_8h_source.html" title="Configuration.h" alt="" coords="659,229,769,256"/>
+<area shape="rect" id="node23" href="$pins_8h_source.html" title="pins.h" alt="" coords="793,229,851,256"/>
+<area shape="rect" id="node25" href="$Timer_8h.html" title="Timer.h" alt="" coords="257,304,323,331"/>
+<area shape="rect" id="node27" href="$MarlinSerial_8h_source.html" title="MarlinSerial.h" alt="" coords="1470,229,1571,256"/>
+<area shape="rect" id="node28" href="$lcd_8h.html" title="lcd.h" alt="" coords="143,229,194,256"/>
+<area shape="rect" id="node17" href="$boards_8h_source.html" title="boards.h" alt="" coords="970,304,1042,331"/>
+<area shape="rect" id="node18" href="$Configuration__prusa_8h_source.html" title="Configuration_prusa.h" alt="" coords="695,304,845,331"/>
+<area shape="rect" id="node20" href="$eeprom_8h_source.html" title="eeprom.h" alt="" coords="869,304,945,331"/>
+<area shape="rect" id="node21" href="$Configuration__adv_8h_source.html" title="Configuration_adv.h" alt="" coords="537,386,675,413"/>
+<area shape="rect" id="node22" href="$thermistortables_8h_source.html" title="thermistortables.h" alt="" coords="493,304,620,331"/>
+<area shape="rect" id="node24" href="$pins__Rambo__1__3_8h_source.html" title="pins_Rambo_1_3.h" alt="" coords="1067,304,1201,331"/>
+</map>

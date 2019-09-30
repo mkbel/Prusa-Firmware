@@ -1,0 +1,17 @@
+<map id="fsensor.h" name="fsensor.h">
+<area shape="rect" id="node3" href="$planner_8h_source.html" title="planner.h" alt="" coords="328,80,403,107"/>
+<area shape="rect" id="node4" href="$Marlin_8h_source.html" title="Marlin.h" alt="" coords="639,155,707,181"/>
+<area shape="rect" id="node13" href="$system__timer_8h.html" title="system_timer.h" alt="" coords="1420,229,1532,256"/>
+<area shape="rect" id="node15" href="$fastio_8h_source.html" title="fastio.h" alt="" coords="1619,229,1685,256"/>
+<area shape="rect" id="node17" href="$Configuration_8h_source.html" title="Configuration.h" alt="" coords="926,229,1037,256"/>
+<area shape="rect" id="node24" href="$pins_8h_source.html" title="pins.h" alt="" coords="1306,229,1363,256"/>
+<area shape="rect" id="node26" href="$Timer_8h.html" title="Timer.h" alt="" coords="541,304,608,331"/>
+<area shape="rect" id="node28" href="$MarlinSerial_8h_source.html" title="MarlinSerial.h" alt="" coords="1180,229,1281,256"/>
+<area shape="rect" id="node29" href="$lcd_8h.html" title="lcd.h" alt="" coords="448,229,499,256"/>
+<area shape="rect" id="node18" href="$boards_8h_source.html" title="boards.h" alt="" coords="1293,304,1365,331"/>
+<area shape="rect" id="node19" href="$Configuration__prusa_8h_source.html" title="Configuration_prusa.h" alt="" coords="1019,304,1168,331"/>
+<area shape="rect" id="node21" href="$eeprom_8h_source.html" title="eeprom.h" alt="" coords="1193,304,1269,331"/>
+<area shape="rect" id="node22" href="$Configuration__adv_8h_source.html" title="Configuration_adv.h" alt="" coords="860,386,999,413"/>
+<area shape="rect" id="node23" href="$thermistortables_8h_source.html" title="thermistortables.h" alt="" coords="817,304,943,331"/>
+<area shape="rect" id="node25" href="$pins__Rambo__1__3_8h_source.html" title="pins_Rambo_1_3.h" alt="" coords="1390,304,1525,331"/>
+</map>
