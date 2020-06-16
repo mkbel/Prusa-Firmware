@@ -3315,7 +3315,12 @@ static void gcode_PRUSA_SN()
     timeout.start();
 
     while (numbersRead < 19) {
-        while (MSerial.available() > 0) {
+        int available = 0;
+        {
+            SerialPortHelper(0);
+            available = MSerial.available();
+        }
+        if (available > 0) {
             uint8_t serial_char = '?';
             {
                 SerialPortHelper(0);
